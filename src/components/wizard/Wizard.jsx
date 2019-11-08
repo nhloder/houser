@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import axios from 'axios'
 
 class Wizard extends Component {
   constructor() {
@@ -13,36 +14,44 @@ class Wizard extends Component {
       img: ""
     };
   }
-  updateName(e) {
+
+  addHouse = () => {
+    axios.post(`/api/houser`, this.state)
+    .then(() => {
+      this.props.history.push('/')
+    })
+  }
+
+  updateName=(e) => {
     this.setState({
       name: e.target.value
     });
   }
 
-  updateAddress(e) {
+  updateAddress = (e) => {
     this.setState({
       address: e.target.value
     });
   }
 
-  updateCity(e) {
+  updateCity = (e) => {
     this.setState({
       city: e.target.value
     });
   }
 
-  updateState(e) {
+  updateState = (e) => {
     this.setState({
       state: e.target.value
     });
   }
 
-  updateZipcode(e) {
+  updateZipcode = (e) => {
     this.setState({
       zipcode: e.target.value
     });
   }
-  updateImg(e) {
+  updateImg = (e) => {
     this.setState({
       img: e.target.value
     });
@@ -56,25 +65,34 @@ class Wizard extends Component {
       <div>
         Wizard
         <Link to="/">Cancel</Link>
+
         <br />
         <span>Name:</span>
         <input onChange={e => this.updateName(e)} />
+
         <br />
         <span>Address:</span>
         <input onChange={e => this.updateAddress(e)} />
+
         <br />
         <span>City:</span>
         <input onChange={e => this.updateCity(e)} />
+
         <br />
         <span>State:</span>
         <input onChange={e => this.updateState(e)} />
+
         <br />
         <span>Zipcode:</span>
         <input onChange={e => this.updateZipcode(e)} />
+
         <br />
         <span>Img URL:</span>
         <input onChange={e => this.updateImg(e)} />
         {this.whatsState()}
+
+        <br/>
+          <button onClick = {() => this.addHouse()}>Complete</button>
       </div>
     );
   }
