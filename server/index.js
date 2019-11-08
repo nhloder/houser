@@ -14,4 +14,4 @@ massive(CONNECTION_STRING).then(databaseConnection => {
    app.listen(SERVER_PORT, () => console.log(`${SERVER_PORT} bottles of [ R E D A C T E D ] on the wall!`))
 })
 // ENDPOINTS \\
-
+app.get('/api/houser', ctrl.getAll)
