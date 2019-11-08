@@ -12,3 +12,8 @@ insert into houser (name, address, city, state, zipcode)
 values
 ('Jonathan Joestar', '123 this st.', 'New York', 'NY', 74849 )
 ('Joseph Joestar', '123 that st', 'New York', 'NY', 83294)
+
+alter table houser
+add column img text
+add column mortgage decimal
+add column rent decimal
