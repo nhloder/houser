@@ -8,12 +8,12 @@ import routes from "./routes";
 
 function App() {
   return (
-    <HashRouter>
+
       <div className="App">
         <Header />
         {routes}
       </div>
-    </HashRouter>
+
   );
 }
 
