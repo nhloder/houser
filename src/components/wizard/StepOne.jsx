@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { stepOne } from '../../dux/reducer';
 
 class StepOne extends Component {
   constructor() {
@@ -12,8 +13,12 @@ class StepOne extends Component {
       city: "",
       state: "",
       zipcode: 0,
-      img: ""
     };
+  }
+
+  componentDidMount(){
+    const {name, address, city, state, zipcode} = this.props
+    this.setState({name, address, city, state, zipcode})
   }
 
   addHouse = () => {
@@ -51,13 +56,13 @@ class StepOne extends Component {
       zipcode: e.target.value
     });
   };
-  updateImg = e => {
-    this.setState({
-      img: e.target.value
-    });
-  };
+  
 
   render() {
+    // console.log(this.state);
+    // console.log(this.props);
+    
+    
     return (
       <div>
         <br />
@@ -80,20 +85,28 @@ class StepOne extends Component {
         <span>Zipcode:</span>
         <input onChange={e => this.updateZipcode(e)} />
 
-        <br />
-        <span>Img URL:</span>
-        <input onChange={e => this.updateImg(e)} />
         {/* {this.whatsState()} */}
         <br/>
-
-        <Link to = '/wizard/step2'>Next</Link>
+        <Link to = '/wizard/step2' ><button onClick = {() => this.props.stepOne(this.state.name, this.state.address, this.state.city, this.state.state, this.state.zipcode)}>Next Step</button>
+       </Link>
       </div>
     );
   }
 }
 
 function mapStateToProps(reduxState){
-  return reduxState
-}
+  const {name, address, city, state, zipcode} = reduxState;
+  console.log(reduxState);
+  return {
+    name,
+    address,
+    city,
+    state,
+    zipcode,
+  };
+};
+// const mapDispatchToProps ={
+//   stepOne
+// };
 
-export default connect(mapStateToProps)(StepOne);
+export default connect(mapStateToProps, {stepOne})(StepOne);

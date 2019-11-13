@@ -12,12 +12,21 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    axios.get(`/api/houser`).then(res => {
-      this.setState({
-        houses: res.data
+    this.getHouses()
+  };
+  
+  getHouses = () => {
+    axios
+      .get(`/api/houser`)
+      .then(houses => {
+        this.setState({
+          houses: houses.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
       });
-    });
-  }
+  };
 
   commitDie(id){
     console.log(id)
